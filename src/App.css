@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+.store-header {
+    border-right: 2px solid #C7CCCF !important;
+  }
