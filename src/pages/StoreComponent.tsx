@@ -1,9 +1,7 @@
 import { StoreDataType } from "../data/StoreData";
 import { useRef, useState } from "react";
 import GridComponent from "../components/GridComponent";
-import { RiDeleteBinLine } from "react-icons/ri";
 import AddButton from "../components/AddButton";
-import React from "react";
 import { AgGridReact } from "@ag-grid-community/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -13,20 +11,25 @@ import {
   ICellRendererParams,
   CellValueChangedEvent,
 } from "@ag-grid-community/core";
+import DeleteButton from "../components/DeleteButton";
 
 const StoreComponent = () => {
   const [tempRows, setTempRows] = useState<{ [key: string]: StoreDataType }>(
     {}
   );
 
+  // Redux dispatch function to trigger actions (add, update, delete)
   const dispatch = useDispatch();
+
+  // Grabbing the current list of stores from the Redux store
+  // If there are temporary row changes (unsaved edits), we merge them in
   const rowData = useSelector((state: RootState) => state.store.stores).map(
     (row) => ({
       ...row,
       ...(tempRows[row.ID] || {}),
     })
   );
-
+  // Ref for accessing the AG Grid instance
   const gridRef = useRef<AgGridReact<StoreDataType>>(null);
 
   const handleDelete = (seqNo: number) => {
@@ -36,7 +39,7 @@ const StoreComponent = () => {
   const handleAdd = () => {
     dispatch(addStore());
   };
-
+  // Called when a cell's value changes
   const handleCellValueChange = (params: CellValueChangedEvent) => {
     const { data, column, newValue, oldValue } = params;
     if (!data || !column || newValue === oldValue) return;
@@ -50,19 +53,14 @@ const StoreComponent = () => {
       dispatch(updateStore(updatedRow));
     }
   };
-
+  // Column definitions for the AG Grid
   const columnDefs: ColDef<StoreDataType>[] = [
     {
       headerName: "",
       width: 50,
       cellRenderer: (params: ICellRendererParams) => {
-        return React.createElement(
-          "button",
-          {
-            onClick: () => handleDelete(params.data["Seq No."]),
-            className: "text-black center text-xl px-2 py-1 rounded",
-          },
-          <RiDeleteBinLine />
+        return (
+          <DeleteButton onClick={() => handleDelete(params.data["Seq No."])} />
         );
       },
     },

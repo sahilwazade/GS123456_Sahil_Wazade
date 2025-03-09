@@ -7,8 +7,10 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { ColDef, ColGroupDef, ModuleRegistry } from "@ag-grid-community/core";
 import GridComponent from "../components/GridComponent";
 
+// Register AG Grid client-side row model module
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
+// Create a Map that indexes the calculations by Store-SKU-Week for quick lookup
 const createCalculationMap = () => {
   const map = new Map<string, (typeof calculations)[number]>();
 
@@ -19,6 +21,8 @@ const createCalculationMap = () => {
 
   return map;
 };
+
+// Merge store, SKU, and calendar data with the calculation map to build row data for the grid
 const buildMergedData = (
   calcMap: Map<string, (typeof calculations)[number]>
 ) => {
@@ -37,6 +41,7 @@ const buildMergedData = (
         const key = `${store.ID}-${sku.ID}-${week.Week}`;
         const calc = calcMap.get(key);
 
+        // Add calculation values for each metric (or defaults if not found)
         row[`${week.Week}-Sales Units`] = calc?.["Sales Units"] ?? 0;
         row[`${week.Week}-Sales Dollars`] = calc?.["Sales Dollars"] ?? 0;
         row[`${week.Week}-Cost Dollars`] = calc?.["Cost Dollars"] ?? 0;
@@ -51,6 +56,7 @@ const buildMergedData = (
   return merged;
 };
 
+// Build column definitions for AG Grid, grouped by month and weeks
 const createColumnDefs = () => {
   const monthMap = new Map<
     string,
@@ -63,6 +69,7 @@ const createColumnDefs = () => {
         monthMap.set(Month, { monthLabel, weeks: [] });
       }
 
+      // Define columns for each metric within a week
       const weekGroup: ColGroupDef = {
         headerName: weekLabel,
         headerClass: "center-header",
@@ -79,6 +86,7 @@ const createColumnDefs = () => {
     }
   );
 
+  // Convert monthMap values into an array of column group definitions
   const dynamicColumns: ColGroupDef[] = Array.from(monthMap.values()).map(
     ({ monthLabel, weeks }) => ({
       headerName: monthLabel,
@@ -94,6 +102,7 @@ const createColumnDefs = () => {
   ];
 };
 
+// Create pinned (fixed position) column definitions (Store/SKU)
 const createPinnedCol = (field: string, headerName: string): ColDef => ({
   headerName,
   field,
@@ -102,6 +111,7 @@ const createPinnedCol = (field: string, headerName: string): ColDef => ({
   filter: true,
 });
 
+// Create a basic number column
 const createNumberCol = (
   field: string,
   headerName: string,
@@ -113,6 +123,7 @@ const createNumberCol = (
   cellStyle: { textAlign: "right" },
 });
 
+// Create a currency column with formatting applied
 const createCurrencyCol = (
   field: string,
   headerName: string,
@@ -128,6 +139,7 @@ const createCurrencyCol = (
   },
 });
 
+// Create a GM% (Gross Margin Percentage) column with custom cell styles
 const createGMPercentCol = (
   field: string,
   headerName: string,
@@ -144,6 +156,7 @@ const createGMPercentCol = (
   },
 });
 
+// Returns cell styles based on GM% thresholds
 const getGMCellStyle = (value: number = 0) => {
   const percentage = value * 100;
 

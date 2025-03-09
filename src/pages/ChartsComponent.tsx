@@ -12,6 +12,7 @@ import {
 import { chartsData } from "../data/ChartsData";
 
 const ChartsComponent = () => {
+  // Transforming the original data to convert GM % from a decimal (e.g., 0.25) to a percentage (e.g., 25)
   const transformedData = chartsData.map((item) => ({
     ...item,
     "GM %": item["GM %"] * 100,
@@ -28,6 +29,7 @@ const ChartsComponent = () => {
             data={transformedData}
             margin={{ top: 20, right: 50, left: 20, bottom: 20 }}
           >
+            {/* Adds a grid to the chart background */}
             <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
 
             <XAxis dataKey="Week" tick={{ fill: "#fff" }} />
@@ -56,7 +58,7 @@ const ChartsComponent = () => {
               }}
               tickFormatter={(value) => `${value.toFixed(0)}%`}
             />
-
+            {/* Tooltip shows data when hovering over the chart */}
             <Tooltip
               contentStyle={{
                 backgroundColor: "rgba(0,0,0,0.75)",
@@ -72,6 +74,7 @@ const ChartsComponent = () => {
               }}
             />
 
+            {/* Legend displays the keys for the data series */}
             <Legend wrapperStyle={{ color: "#fff" }} />
 
             <Bar
@@ -81,6 +84,7 @@ const ChartsComponent = () => {
               name="GM Dollars"
             />
 
+            {/* Line chart for GM % on the right Y-axis */}
             <Line
               yAxisId="right"
               type="monotone"
