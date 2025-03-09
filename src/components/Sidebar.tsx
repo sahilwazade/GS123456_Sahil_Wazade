@@ -3,12 +3,42 @@ import { MdStore } from "react-icons/md";
 import { BiGame } from "react-icons/bi";
 import { VscGraph } from "react-icons/vsc";
 import { BiBarChartSquare } from "react-icons/bi";
+import { useState } from "react";
 
 interface Props {
   isOpen: boolean;
 }
 
 const Sidebar = ({ isOpen }: Props) => {
+  const [selected, setSelected] = useState<string>("store");
+
+  const menuItems = [
+    {
+      label: "Store",
+      icon: <MdStore className="text-2xl" />,
+      path: "/",
+      id: "store",
+    },
+    {
+      label: "SKU",
+      icon: <BiGame className="text-2xl" />,
+      path: "/SKU",
+      id: "sku",
+    },
+    {
+      label: "Planning",
+      icon: <VscGraph className="text-2xl" />,
+      path: "/planning",
+      id: "planning",
+    },
+    {
+      label: "Charts",
+      icon: <BiBarChartSquare className="text-2xl" />,
+      path: "/charts",
+      id: "charts",
+    },
+  ];
+
   return (
     <aside
       className={`fixed top-20 left-0 w-64 h-screen bg-white-900 text-gray-800 transition-transform duration-300 ${
@@ -16,45 +46,23 @@ const Sidebar = ({ isOpen }: Props) => {
       } lg:translate-x-0`}
     >
       <ul>
-        <li
-          className="py-2 px-10 custom-gray cursor-pointer flex items-center space-x-2"
-          style={{ transition: "background-color 0.3s ease" }}
-        >
-          <Link
-            to="/"
-            className="flex items-center space-x-2 w-full text-gray-900"
+        {menuItems.map((item) => (
+          <li
+            key={item.id}
+            onClick={() => setSelected(item.id)}
+            className={`py-2 px-10 cursor-pointer flex items-center space-x-2
+              ${selected === item.id ? "custom-gray" : ""}`}
+            style={{ transition: "background-color 0.3s ease" }}
           >
-            <MdStore className="text-2xl" />
-            <span>Store</span>
-          </Link>
-        </li>
-        <li
-          className="py-2 px-10 custom-gray cursor-pointer flex items-center space-x-2"
-          style={{ transition: "background-color 0.3s ease" }}
-        >
-          <Link to="/SKU" className="flex items-center space-x-2 w-full">
-            <BiGame className="text-2xl" />
-            <span>SKU</span>
-          </Link>
-        </li>
-        <li
-          className="py-2 px-10 custom-gray cursor-pointer flex items-center space-x-2"
-          style={{ transition: "background-color 0.3s ease" }}
-        >
-          <Link to="/planning" className="flex items-center space-x-2 w-full">
-            <VscGraph className="text-2xl" />
-            <span>Planning</span>
-          </Link>
-        </li>
-        <li
-          className="py-2 px-10 custom-gray cursor-pointer flex items-center space-x-2"
-          style={{ transition: "background-color 0.3s ease" }}
-        >
-          <Link to="/charts" className="flex items-center space-x-2 w-full">
-            <BiBarChartSquare className="text-2xl" />
-            <span>Charts</span>
-          </Link>
-        </li>
+            <Link
+              to={item.path}
+              className="flex items-center space-x-2 w-full text-gray-900"
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </aside>
   );
