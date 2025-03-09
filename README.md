@@ -57,7 +57,7 @@ data_viewer/
      - Store
      - SKU
      - Planning
-     - Charts (optional)
+     - Charts
 
 3. **Store Dimension Screen**
 
@@ -95,7 +95,7 @@ data_viewer/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/data_viewer.git
+git clone https://github.com/sahilwazade/GS123456_Sahil_Wazade.git
 
 # Install dependencies
 npm install
