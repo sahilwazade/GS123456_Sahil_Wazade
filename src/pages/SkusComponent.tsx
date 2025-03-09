@@ -8,7 +8,7 @@ import AddButton from "../components/AddButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { addSku, deleteSku, updateSku } from "../store/skusSlice";
-import { ColDef } from "@ag-grid-community/core";
+import { ColDef } from "ag-grid-community";
 
 const SkusComponent = () => {
   const [tempRows, setTempRows] = useState<{ [key: string]: SkusDataTypes }>(

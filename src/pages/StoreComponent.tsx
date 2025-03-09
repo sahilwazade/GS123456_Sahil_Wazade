@@ -10,7 +10,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { addStore, deleteStore, updateStore } from "../store/storeSlice";
-import { ColDef } from "@ag-grid-community/core";
+import { ColDef } from "ag-grid-community";
 
 const StoreComponent = () => {
   const [tempRows, setTempRows] = useState<{ [key: string]: StoreDataType }>(
