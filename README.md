@@ -1,54 +1,124 @@
-# React + TypeScript + Vite
+# Data Viewer Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React TypeScript application for managing Stores, SKUs, and Planning data through an AG-Grid-based interface. The app also includes Charts for visualizing GM Dollars and GM %, and provides CRUD operations for Store and SKU dimensions.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✅ Project Structure
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+data_viewer/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── AddButton.tsx
+│   │   ├── DeleteButton.tsx
+│   │   ├── GridComponent.tsx
+│   │   ├── Navbar.tsx
+│   │   └── Sidebar.tsx
+│   ├── data/
+│   │   ├── Calculations.ts
+│   │   ├── CalenderData.ts
+│   │   ├── ChartsData.ts
+│   │   ├── PlanningData.ts
+│   │   ├── SKUsData.ts
+│   │   └── StoreData.ts
+│   ├── pages/
+│   │   ├── ChartsComponent.tsx
+│   │   ├── PlanningComponent.tsx
+│   │   ├── SkusComponent.tsx
+│   │   └── StoreComponent.tsx
+│   ├── store/
+│   │   ├── skusSlice.ts
+│   │   ├── store.ts
+│   │   └── storeSlice.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── .gitignore
+├── index.html
+├── package.json
+├── README.md
+├── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ✅ Features
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. **Top Navigation Bar**
+
+   - Displays the company logo on the left.
+
+2. **Left Sidebar Navigation**
+
+   - Icons and labels for navigating different screens:
+     - Store
+     - SKU
+     - Planning
+     - Charts (optional)
+
+3. **Store Dimension Screen**
+
+   - Add, remove, update, and reorder Stores.
+
+4. **SKU Dimension Screen**
+
+   - Add, remove, update SKUs, including Prices and Costs.
+
+5. **Planning Screen**
+
+   - Displays an AG-Grid with cross join of Stores and SKUs along rows, Calendar along columns.
+   - Editable and calculated columns:
+     - **Sales Units**: Editable integers.
+     - **Sales Dollars**: Auto-calculated (Sales Units \* Price).
+     - **GM Dollars**: Auto-calculated (Sales Dollars – Sales Units \* Cost).
+     - **GM %**: Auto-calculated (GM Dollars / Sales Dollars) with conditional cell coloring:
+       - Green (≥ 40%)
+       - Yellow (≥ 10% and < 40%)
+       - Orange (≥ 5% and < 10%)
+       - Red (≤ 5%)
+
+6. **Charts Screen**
+
+   - Dual-axis bar chart for GM Dollars and GM % by Week.
+   - Aggregates GM Dollars and Sales Dollars across SKUs for each Store.
+
+7. **Responsive Design**
+   - Minimum width: 1080px.
+   - Grid and Chart fit edges of the screen with proper margins and padding.
+
+---
+
+## ✅ Installation & Running
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/data_viewer.git
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
 ```
+
+---
+
+## ✅ Technologies Used
+
+- React 18 + TypeScript
+- AG-Grid
+- Redux Toolkit (Store management)
+- TailwindCSS (for responsive design and styling)
+- Charts library - recharts
+
+---
+
+## ✅ Author
+
+- Sahil Wazade
+- sahilwazade1996@gmail.com
+
+---
