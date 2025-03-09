@@ -23,7 +23,10 @@ function App() {
         <div className="flex">
           <Navbar toggleSidebar={toggleSidebar} />
           <Sidebar isOpen={isSidebarOpen} />
-          <main className="lg:ml-64 mt-16 p-6 h-[calc(100vh-4rem)] overflow-auto bg-gray-100 w-full">
+          <main
+            className="lg:ml-64 mt-16 p-6 h-[calc(100vh-4rem)] overflow-auto w-full"
+            style={{ backgroundColor: "#DFDFDF" }}
+          >
             <Routes>
               <Route path="/" element={<StoreComponent />} />
               <Route path="/SKU" element={<SkusComponent />} />

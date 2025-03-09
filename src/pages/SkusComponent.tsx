@@ -68,8 +68,18 @@ const SkusComponent = () => {
       cellStyle: { borderRight: "2px solid #C7CCCF" },
       headerClass: "store-header",
     },
-    { headerName: "Price", field: "Price", sortable: true },
-    { headerName: "Cost", field: "Cost", sortable: true },
+    {
+      headerName: "Price",
+      field: "Price",
+      sortable: true,
+      valueFormatter: (params) => `$${Number(params.value).toFixed(2)}`,
+    },
+    {
+      headerName: "Cost",
+      field: "Cost",
+      sortable: true,
+      valueFormatter: (params) => `$${Number(params.value).toFixed(2)}`,
+    },
   ];
 
   return (

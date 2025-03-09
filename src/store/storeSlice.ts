@@ -16,28 +16,32 @@ const storeSlice = createSlice({
     addStore: (state) => {
       const maxSeqNo =
         state.stores.length > 0
-          ? Math.max(...state.stores.map((store) => store.SeqNo))
+          ? Math.max(...state.stores.map((store) => store["Seq No."]))
           : 0;
+
       const newItem: StoreDataType = {
-        SeqNo: maxSeqNo + 1,
+        "Seq No.": maxSeqNo + 1,
         ID: `temp-${Date.now()}`,
         Label: "",
         City: "",
         State: "",
       };
+
       state.stores = [newItem, ...state.stores];
     },
+
     deleteStore: (state, action: PayloadAction<number>) => {
       const index = state.stores.findIndex(
-        (store) => store.SeqNo === action.payload
+        (store) => store["Seq No."] === action.payload
       );
       if (index !== -1) {
         state.stores.splice(index, 1);
       }
     },
+
     updateStore: (state, action) => {
       const index = state.stores.findIndex(
-        (store) => String(store.SeqNo) === String(action.payload.SeqNo)
+        (store) => String(store["Seq No."]) === String(action.payload["Seq No."])
       );
 
       if (index !== -1) {

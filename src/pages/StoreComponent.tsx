@@ -57,7 +57,7 @@ const StoreComponent = () => {
         return React.createElement(
           "button",
           {
-            onClick: () => handleDelete(params.data.SeqNo),
+            onClick: () => handleDelete(params.data["Seq No."]),
             className: "text-black center text-xl px-2 py-1 rounded",
           },
           <RiDeleteBinLine />
@@ -73,7 +73,7 @@ const StoreComponent = () => {
     {
       headerName: "S.No",
       width: 150,
-      field: "SeqNo",
+      valueGetter: (params) => params.data?.["Seq No."] ?? "",
       sortable: true,
     },
     {

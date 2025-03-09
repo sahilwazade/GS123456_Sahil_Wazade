@@ -29,7 +29,7 @@ const skuSlice = createSlice({
       const newItem: SkusDataTypes = {
         ID: newSeqNo,
         Label: "",
-        Category: "",
+        Class: "",
         Department: "",
         Price: 0,
         Cost: 0,

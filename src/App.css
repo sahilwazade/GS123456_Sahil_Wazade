@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
-
-.store-header {
-    border-right: 2px solid #C7CCCF !important;
+@layer utilities {
+  .custom-gray:hover {
+    background-color: #DFDFDF;
   }
+}
+
+
+.center-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
