@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { SkusDataTypes } from "../data/SKUsData";
-import { AgGridReact } from "ag-grid-react";
+import { AgGridReact } from "@ag-grid-community/react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { ICellRendererParams, CellValueChangedEvent } from "ag-grid-community";
 import GridComponent from "../components/GridComponent";
@@ -8,7 +8,7 @@ import AddButton from "../components/AddButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { addSku, deleteSku, updateSku } from "../store/skusSlice";
-import { ColDef } from "ag-grid-community";
+import { ColDef } from "@ag-grid-community/core";
 
 const SkusComponent = () => {
   const [tempRows, setTempRows] = useState<{ [key: string]: SkusDataTypes }>(

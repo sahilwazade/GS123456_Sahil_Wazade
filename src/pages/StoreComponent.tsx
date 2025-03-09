@@ -1,16 +1,18 @@
 import { StoreDataType } from "../data/StoreData";
-import { CellValueChangedEvent } from "ag-grid-community";
 import { useRef, useState } from "react";
 import GridComponent from "../components/GridComponent";
 import { RiDeleteBinLine } from "react-icons/ri";
 import AddButton from "../components/AddButton";
 import React from "react";
-import { ICellRendererParams } from "ag-grid-community";
-import { AgGridReact } from "ag-grid-react";
+import { AgGridReact } from "@ag-grid-community/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { addStore, deleteStore, updateStore } from "../store/storeSlice";
-import { ColDef } from "ag-grid-community";
+import {
+  ColDef,
+  ICellRendererParams,
+  CellValueChangedEvent,
+} from "@ag-grid-community/core";
 
 const StoreComponent = () => {
   const [tempRows, setTempRows] = useState<{ [key: string]: StoreDataType }>(

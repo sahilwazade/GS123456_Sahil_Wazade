@@ -3,8 +3,8 @@ import { storeData } from "../data/StoreData";
 import { skusData } from "../data/SKUsData";
 import { calenderData } from "../data/CalenderData";
 import { calculations } from "../data/Calculations";
-import { ClientSideRowModelModule } from "ag-grid-community";
-import { ColDef, ColGroupDef, ModuleRegistry } from "ag-grid-community";
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
+import { ColDef, ColGroupDef, ModuleRegistry } from "@ag-grid-community/core";
 import GridComponent from "../components/GridComponent";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
